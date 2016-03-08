@@ -1,6 +1,8 @@
 
 package org.rifleman.epcalendar;
 
+import org.rifleman.epcalendar.gui.MyCalendar;
+
 /**
  * <h1>EPCalendar</h1>
  * <h3>Class EPCalendar<h3> 
@@ -16,7 +18,7 @@ public class EPCalendar {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        MyCalendar c = new MyCalendar();
     }
 
 }
