@@ -21,9 +21,9 @@ public class MyCalendar extends JFrame {
     public MyCalendar() {
         this.rootPane.setLayout(new BorderLayout());
         JPanel p = new JPanel();
-        p.setLayout(new GridLayout(7,7));
+        p.setLayout(new GridLayout(5,7));
         
-        for (int i = 0; i < 31; i++) {
+        for (int i = 1; i <= 35; i++) {
             p.add(new JButton("" + i));
         }
         //MyPanelWithLayout mp = new MyPanelWithLayout(200, 200);
@@ -39,7 +39,8 @@ public class MyCalendar extends JFrame {
         //p.add(jp);
         //p.add(b);
         
-        this.rootPane.add(p, BorderLayout.CENTER);
+        //this.rootPane.add(p, BorderLayout.CENTER);
+        this.rootPane.add(new NewJPanel(), BorderLayout.CENTER);
         
         this.setBounds(100, 100, 300, 300);
         this.setLocationRelativeTo(null);
