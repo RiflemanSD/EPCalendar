@@ -30,13 +30,13 @@ public class NewJPanel extends javax.swing.JPanel {
         JPanel p1 = new JPanel();
         p1.setLayout(new GridLayout(1,7));
         
-//        p1.add(new JLabel("Δ"));
-//        p1.add(new JLabel("Τ"));
-//        p1.add(new JLabel("Τ"));
-//        p1.add(new JLabel("Π"));
-//        p1.add(new JLabel("Π"));
-//        p1.add(new JLabel("Σ"));
-//        p1.add(new JLabel("Κ"));
+        p1.add(new JLabel("Δ"));
+        p1.add(new JLabel("Τ"));
+        p1.add(new JLabel("Τ"));
+        p1.add(new JLabel("Π"));
+        p1.add(new JLabel("Π"));
+        p1.add(new JLabel("Σ"));
+        p1.add(new JLabel("Κ"));
 //        for (int i = 1; i <= 7; i++) {
 //            p1.add(new JButton("" + i));
 //        }

@@ -18,6 +18,10 @@ public class EPCalendar {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//        [user]
+//            name = RiflemanSD
+//            email = sotirisdoudis@windowslive.com
+        System.out.println("hey");
         MyCalendar c = new MyCalendar();
     }
 
