@@ -38,7 +38,6 @@ public class MyCalendar extends JFrame {
         //mp.add(b);
         //p.add(jp);
         //p.add(b);
-        
         //this.rootPane.add(p, BorderLayout.CENTER);
         this.rootPane.add(new NewJPanel1(), BorderLayout.CENTER);
         this.rootPane.add(new EventList(), BorderLayout.PAGE_END);

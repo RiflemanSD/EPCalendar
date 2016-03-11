@@ -24,7 +24,7 @@ public class EventDB {
     public EventDB() {
         manager = new SQLiteManager("eventDB");
         
-        manager.createTable("event", "id,title,desc,timeTo,repeatTime,weight,done", 1, "s", "s", "NULL", -1, 1, true);
+        manager.createTable("event", "id,title,desc,timeTo,repeatTime,weight,done,duration", 1, "s", "s", "NULL", -1, 1, true, 1);
         
         //Settings
         manager.createTable("settings", "id,name,value", 1, "s", "s");
@@ -38,15 +38,16 @@ public class EventDB {
         int rTime = event.getRepaetTime();
         int w = event.getWeight();
         boolean d = event.isDone();
+        int duration = event.getDuration();
         
-        manager.insert("event", "title,desc,timeTo,repeatTime,weight,done", title, desc, timeTo, rTime, w, d);
+        manager.insert("event", "title,desc,timeTo,repeatTime,weight,done,duration", title, desc, timeTo, rTime, w, d, duration);
     }
     public String getEvents() {
         String r = manager.select("event", "*", "", 7);
         return r;
     }
     public Event getEvent(String title) {
-        String[] r = manager.select("event", "id,title,desc,timeTo,repeatTime,weight,done", "title = '" + title + "'", 7).split(",");
+        String[] r = manager.select("event", "id,title,desc,timeTo,repeatTime,weight,done,duration", "title = '" + title + "'", 8).split(",");
         
         int id = stringToInt(r[0]);
         String desc = r[2];
@@ -54,11 +55,12 @@ public class EventDB {
         int rTime = stringToInt(r[4]);
         int w = stringToInt(r[5]);
         boolean d = stringToBoolean(r[6]);
+        int duration = stringToInt(r[7]);
         
-        return new Event(id, title, desc, timeTo, rTime, w, d);
+        return new Event(id, title, desc, timeTo, rTime, w, d, duration);
     }
     public Event getEvent(int id) {
-        String[] r = manager.select("event", "id,title,desc,timeTo,repeatTime,weight,done", "id = '" + id + "'", 7).split(",");
+        String[] r = manager.select("event", "id,title,desc,timeTo,repeatTime,weight,done,duration", "id = '" + id + "'", 8).split(",");
         
         String title = r[1];
         String desc = r[2];
@@ -66,8 +68,9 @@ public class EventDB {
         int rTime = stringToInt(r[4]);
         int w = stringToInt(r[5]);
         boolean d = stringToBoolean(r[6]);
+        int duration = stringToInt(r[7]);
         
-        return new Event(id, title, desc, timeTo, rTime, w, d);
+        return new Event(id, title, desc, timeTo, rTime, w, d, duration);
     }
     
     public void saveSetting(String name, String value) {

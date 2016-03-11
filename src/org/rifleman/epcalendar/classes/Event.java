@@ -20,8 +20,9 @@ public class Event {
     private int repaetTime; // Μετά από πόση ώρα θα επαναληυθεί ή -1 για όχι επανάληψη
     private int weight; // Βάρος ( πιο event είναι πιο σημαντικό )
     private boolean done; // Πραγματοποιήθηκε το event ?
+    private int duration; // Διάρκεια του event
 
-    public Event(int id, String title, String description, Date dateTo, int repaetTime, int weight, boolean done) {
+    public Event(int id, String title, String description, Date dateTo, int repaetTime, int weight, boolean done, int duration) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -29,8 +30,9 @@ public class Event {
         this.repaetTime = repaetTime;
         this.weight = weight;
         this.done = done;
+        this.duration = duration;
     }
-    public Event(int id, String title, String description, Date dateTo, int repaetTime, int weight) {
+    public Event(int id, String title, String description, Date dateTo, int repaetTime, int weight, int duration) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -38,8 +40,9 @@ public class Event {
         this.repaetTime = repaetTime;
         this.weight = weight;
         this.done = false;
+        this.duration = duration;
     }
-    public Event(int id, String title, String description, int repaetTime) {
+    public Event(int id, String title, String description, int repaetTime, int duration) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -47,8 +50,9 @@ public class Event {
         this.repaetTime = repaetTime;
         this.weight = 5;
         this.done = false;
+        this.duration = duration;
     }
-    public Event(int id, String title, String description, Date dateTo) {
+    public Event(int id, String title, String description, Date dateTo, int duration) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -56,6 +60,7 @@ public class Event {
         this.repaetTime = -1;
         this.weight = 5;
         this.done = false;
+        this.duration = duration;
     }
     
     public int getId() {
@@ -112,6 +117,14 @@ public class Event {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
     
     
