@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.rifleman.epcalendar.gui;
+package org.rifleman.epcalendar.test;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

@@ -1,5 +1,5 @@
 
-package org.rifleman.epcalendar.gui;
+package org.rifleman.epcalendar.test;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

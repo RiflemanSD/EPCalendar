@@ -5,6 +5,7 @@
  */
 package org.rifleman.epcalendar.gui;
 
+import org.rifleman.epcalendar.test.NewJPanel1;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;

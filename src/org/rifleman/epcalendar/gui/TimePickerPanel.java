@@ -21,9 +21,9 @@ public class TimePickerPanel extends javax.swing.JPanel {
         initComponents();
         
         Date d = new Date();
-        d.setHours(10);
         d.setMinutes(0);
-        timePikcer = new TimePicker("dd-MM-yyyy HH:mm:ss", d);
+        
+        timePikcer = new TimePicker("HH:mm", d);
         this.add(timePikcer, BorderLayout.CENTER);
     }
 
