@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.rifleman.epcalendar.classes.Event;
+import org.rifleman.epcalendar.utils.MyUtils;
 
 /**
  *
@@ -34,7 +35,7 @@ public class EventDB {
         String title = event.getTitle();
         String desc = event.getDescription();
         String timeTo = "NULL";
-        if (event.getDateTo() != null) timeTo = this.dateToString(event.getDateTo());
+        if (event.getDateTo() != null) timeTo = MyUtils.dateToString(event.getDateTo());
         int rTime = event.getRepaetTime();
         int w = event.getWeight();
         boolean d = event.isDone();
@@ -49,13 +50,13 @@ public class EventDB {
     public Event getEvent(String title) {
         String[] r = manager.select("event", "id,title,desc,timeTo,repeatTime,weight,done,duration", "title = '" + title + "'", 8).split(",");
         
-        int id = stringToInt(r[0]);
+        int id = MyUtils.stringToInt(r[0]);
         String desc = r[2];
-        Date timeTo = getDate(r[3]);
-        int rTime = stringToInt(r[4]);
-        int w = stringToInt(r[5]);
-        boolean d = stringToBoolean(r[6]);
-        int duration = stringToInt(r[7]);
+        Date timeTo = MyUtils.getDate(r[3]);
+        int rTime = MyUtils.stringToInt(r[4]);
+        int w = MyUtils.stringToInt(r[5]);
+        boolean d = MyUtils.stringToBoolean(r[6]);
+        int duration = MyUtils.stringToInt(r[7]);
         
         return new Event(id, title, desc, timeTo, rTime, w, d, duration);
     }
@@ -64,11 +65,11 @@ public class EventDB {
         
         String title = r[1];
         String desc = r[2];
-        Date timeTo = getDate(r[3]);
-        int rTime = stringToInt(r[4]);
-        int w = stringToInt(r[5]);
-        boolean d = stringToBoolean(r[6]);
-        int duration = stringToInt(r[7]);
+        Date timeTo = MyUtils.getDate(r[3]);
+        int rTime = MyUtils.stringToInt(r[4]);
+        int w = MyUtils.stringToInt(r[5]);
+        boolean d = MyUtils.stringToBoolean(r[6]);
+        int duration = MyUtils.stringToInt(r[7]);
         
         return new Event(id, title, desc, timeTo, rTime, w, d, duration);
     }
@@ -87,59 +88,5 @@ public class EventDB {
         //System.out.println(result.replace("\n", ""));
         
         return result.replace("\n", "").replace(" ", "");
-    }
-    
-    public boolean stringToBoolean(String str) {
-        if (str.equals("true")) return true;
-        else return false;
-    }
-    public int stringToInt(String str) {
-        int number = -1;
-        
-        try {
-            number = Integer.parseInt(str);
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-        
-        return number;
-    }
-    public double stringToDouble(String str) {
-        double number = -1;
-        
-        try {
-            number = Double.parseDouble(str);
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-        
-        return number;
-    }
-    
-    public String currentTime() {
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        Date today = Calendar.getInstance().getTime();        
-        String reportDate = df.format(today);
-        
-        return reportDate;
-    }
-    public String dateToString(Date date) {
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String reportDate = df.format(date);
-        
-        return reportDate;
-    }
-    
-    public Date getDate(String sdate) {
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        try {
-            return format.parse(sdate);
-        } catch (ParseException ex) {
-            Logger.getLogger(EventDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return new Date();
     }
 }

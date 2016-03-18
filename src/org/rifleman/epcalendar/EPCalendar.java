@@ -1,6 +1,7 @@
 
 package org.rifleman.epcalendar;
 
+import org.rifleman.epcalendar.database.EventDB;
 import org.rifleman.epcalendar.gui.MyCalendar;
 
 /**
@@ -13,16 +14,19 @@ import org.rifleman.epcalendar.gui.MyCalendar;
  * @author RiflemanSD
  */
 public class EPCalendar {
-
+    public static EventDB database;
+    
+    public EPCalendar() {
+        database = new EventDB();
+        
+        System.out.println("hey");
+        MyCalendar c = new MyCalendar();
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        [user]
-//            name = RiflemanSD
-//            email = sotirisdoudis@windowslive.com
-        System.out.println("hey");
-        MyCalendar c = new MyCalendar();
+        new EPCalendar();
     }
 
 }

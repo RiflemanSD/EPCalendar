@@ -1,6 +1,8 @@
 
 package org.rifleman.epcalendar.gui;
 
+import org.rifleman.epcalendar.EPCalendar;
+import org.rifleman.epcalendar.classes.Event;
 import org.rifleman.epcalendar.utils.MyUtils;
 
 /**
@@ -25,7 +27,6 @@ public class InsertEvent extends javax.swing.JPanel {
     private void initComponents() {
 
         durationLabel = new javax.swing.JLabel();
-        durationTF = new javax.swing.JTextField();
         dateLabel = new javax.swing.JLabel();
         repeatTF = new javax.swing.JTextField();
         repeatLabel = new javax.swing.JLabel();
@@ -34,17 +35,16 @@ public class InsertEvent extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         descTA = new javax.swing.JTextArea();
         weightCB = new javax.swing.JComboBox();
-        timePickerPanel = new org.rifleman.epcalendar.gui.TimePickerPanel();
+        timePickerFrom = new org.rifleman.epcalendar.gui.TimePickerPanel();
         insertButton = new javax.swing.JButton();
         repeatCB = new javax.swing.JComboBox();
         titleLabel = new javax.swing.JLabel();
         titleTF = new javax.swing.JTextField();
-        datePicker1 = new org.rifleman.epcalendar.gui.DatePicker();
+        datePicker = new org.rifleman.epcalendar.gui.DatePicker();
+        timePickerTo = new org.rifleman.epcalendar.gui.TimePickerPanel();
 
         durationLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         durationLabel.setText("Duration");
-
-        durationTF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         dateLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dateLabel.setText("Date");
@@ -94,7 +94,7 @@ public class InsertEvent extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(insertButton)
-                        .addGap(149, 209, Short.MAX_VALUE))
+                        .addGap(149, 171, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -104,7 +104,7 @@ public class InsertEvent extends javax.swing.JPanel {
                                     .addComponent(repeatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(weightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(5, 5, 5)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -115,13 +115,13 @@ public class InsertEvent extends javax.swing.JPanel {
                                                 .addComponent(repeatTF))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(timePickerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                                        .addComponent(datePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(durationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(durationTF))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(timePickerFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(timePickerTo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(5, 5, 5)
@@ -136,14 +136,14 @@ public class InsertEvent extends javax.swing.JPanel {
                     .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(titleTF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(durationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(durationTF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(timePickerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(datePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(durationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timePickerFrom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timePickerTo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(repeatCB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,35 +171,111 @@ public class InsertEvent extends javax.swing.JPanel {
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         String title = this.titleTF.getText();
         String desc = this.descTA.getText();
-        String sduration = this.durationTF.getText();
-        String date = this.timePickerPanel.getValue();
-        String srepeatCB = (String)this.repeatCB.getSelectedItem();
+        String sdf = this.timePickerFrom.getValue();
+        String sdt = this.timePickerTo.getValue();
+        String date = this.timePickerFrom.getValue();
+        int repeatCB = this.repeatCB.getSelectedIndex();
         String srepeat = this.repeatTF.getText();
-        String sweight = (String)this.weightCB.getSelectedItem();
+        int weight = this.weightCB.getSelectedIndex();
         
-        System.out.println(title);
-        System.out.println(desc);
-        System.out.println(MyUtils.stringToInt(sduration));
-        System.out.println(date);
-        System.out.println(srepeatCB);
-        System.out.println(MyUtils.stringToInt(srepeat));
-        System.out.println(MyUtils.stringToInt(sweight));
+        double duration = 0;
+        
+//        long from = MyUtils.getDate(sdf).getTime();
+//        long to = MyUtils.getDate(sdt).getTime();
+//        
+//        if (from > to) {
+//            duration = from - to;
+//            duration /= 60000;
+//        }
+        int rTime = 0;
+        
+        if (!srepeat.isEmpty()) {
+            if (repeatCB == 0) {
+                // Hours
+                // Επαναλάψη κάθε τόσες ώρες (24 ώρες για κάθε μέρα)
+                rTime = MyUtils.stringToInt(srepeat);
+            }
+            else if (repeatCB == 1) {
+                // Days
+                // Επανάληψη αυτές τις μέρες (ΔΕ, ΤΡ, ΤΕ, ΠΕ, ΠΑ, ΣΑ, ΚΥ)
+                // ΔΕ-ΠΑ (από δευτέρα μέχρι παρασκευή
+                // ΔΕ (κάθε δευτέρα)
+                // ΔΕ-ΤΕ 12:30
+                /*
+                ΔΕ -1 24*60=1440 = -11440
+                ΤΡ -2
+                ΤΕ -3
+                ΠΕ -4
+                ΠΑ -5
+                ΣΑ -6
+                ΚΥ -7
+                 */
+                String[] s1 = srepeat.split(" ");
+                String[] s2 = s1[0].split("-");
+                String[] s3 = s1[1].split(":");
+                
+                System.out.println(s2[0] + " " + s3[1]);
+            }
+            else if (repeatCB == 2) {
+                // Months
+                // Επανάληψη αυτόν τον μήνα ή κάθε πρώτη του μηνός ?
+                // Επανάληψη τον μήνα : 13 12:30 (Στις 13 κάθε μηνός)
+                // Επανάληψε κάθε πρώτη του μηνός ( F = πρώτη ή L = Τελευταία ) F 12
+                /*
+                -8 01 24*60 = -8011440
+                */
+                String[] s1 = srepeat.split(" ");
+                
+                System.out.println(s1[0] + " " + s1[1]);
+            }
+            else {
+                // Year
+                // Επανάληψη κάθε χρόνο τάδε του μηνός
+                // 1-1 10:00 (1 Ιανουαρίου 10 η ώρα)
+                //-9 0101 24*60 = -901011440
+                String[] s1 = srepeat.split(" ");
+                
+                System.out.println(s1[0] + " " + s1[1]);
+            }
+        }
+        
+        Event event = new Event(0, title, desc, MyUtils.getDate(date), repeatCB, weight, false, (int)duration);
+        
+        //EPCalendar.database.saveEvent(event);
     }//GEN-LAST:event_insertButtonActionPerformed
 
+    private int dayToInt(String day, String[] days) {
+        for (int i = 0; i < days.length; i++) {
+            if (day.equals(days[i])) {
+                return i;
+            }
+        }
+        
+        return 0;
+    }
+    
+    private int shoursToMinutes(String shours) {
+        String[] sh = shours.split(":");
+        int h = MyUtils.stringToInt(sh[0]); if (h < 0) return -1;
+        int m = MyUtils.stringToInt(sh[1]); if (m < 0) return -1;
+        
+        return h*60 + m;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dateLabel;
-    private org.rifleman.epcalendar.gui.DatePicker datePicker1;
+    private org.rifleman.epcalendar.gui.DatePicker datePicker;
     private javax.swing.JLabel descLabel;
     private javax.swing.JTextArea descTA;
     private javax.swing.JLabel durationLabel;
-    private javax.swing.JTextField durationTF;
     private javax.swing.JButton insertButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox repeatCB;
     private javax.swing.JLabel repeatLabel;
     private javax.swing.JTextField repeatTF;
-    private org.rifleman.epcalendar.gui.TimePickerPanel timePickerPanel;
+    private org.rifleman.epcalendar.gui.TimePickerPanel timePickerFrom;
+    private org.rifleman.epcalendar.gui.TimePickerPanel timePickerTo;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField titleTF;
     private javax.swing.JComboBox weightCB;
