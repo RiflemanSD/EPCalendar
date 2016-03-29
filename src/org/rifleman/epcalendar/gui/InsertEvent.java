@@ -94,7 +94,7 @@ public class InsertEvent extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(insertButton)
-                        .addGap(149, 171, Short.MAX_VALUE))
+                        .addGap(149, 189, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -110,7 +110,7 @@ public class InsertEvent extends javax.swing.JPanel {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(weightCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(repeatCB, 0, 0, Short.MAX_VALUE)
+                                                .addComponent(repeatCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(repeatTF))))
                                     .addGroup(layout.createSequentialGroup()
@@ -180,13 +180,13 @@ public class InsertEvent extends javax.swing.JPanel {
         
         double duration = 0;
         
-//        long from = MyUtils.getDate(sdf).getTime();
-//        long to = MyUtils.getDate(sdt).getTime();
-//        
-//        if (from > to) {
-//            duration = from - to;
-//            duration /= 60000;
-//        }
+        long from = MyUtils.getDate(sdf).getTime();
+        long to = MyUtils.getDate(sdt).getTime();
+        
+        if (from > to) {
+            duration = from - to;
+            duration /= 60000;
+        }
         int rTime = 0;
         
         if (!srepeat.isEmpty()) {
@@ -209,12 +209,24 @@ public class InsertEvent extends javax.swing.JPanel {
                 ΠΑ -5
                 ΣΑ -6
                 ΚΥ -7
+                ΔΕ-ΤΕ 12:30  -103 12*60+30 = -103750
                  */
+                String[] daysNames = {"ΔΕ", "ΤΡ", "ΤΕ", "ΠΕ", "ΠΑ", "ΣΑ", "ΚΥ"};
+                
                 String[] s1 = srepeat.split(" ");
                 String[] s2 = s1[0].split("-");
-                String[] s3 = s1[1].split(":");
+                String d;
+                if (s2.length == 0) {
+                    d = s1[0];
+                }
+                else {
+                    d = "-" + this.dayNameToInt(s2[0], daysNames) + "0" + this.dayNameToInt(s2[1], daysNames);
+                }
                 
-                System.out.println(s2[0] + " " + s3[1]);
+                String n = d + this.shoursToMinutes(s1[1]) + "";
+                
+                System.out.println(n + ", " + MyUtils.stringToInt(n));
+                
             }
             else if (repeatCB == 2) {
                 // Months
@@ -239,25 +251,55 @@ public class InsertEvent extends javax.swing.JPanel {
             }
         }
         
-        Event event = new Event(0, title, desc, MyUtils.getDate(date), repeatCB, weight, false, (int)duration);
+        Event event = new Event(0, title, desc, MyUtils.getDate(date), rTime, weight, false, (int)duration);
+        
+        System.out.println(title);
+        System.out.println(desc);
+        System.out.println(date);
+        System.out.println(rTime);
+        System.out.println(weight);
+        System.out.println(duration);
         
         //EPCalendar.database.saveEvent(event);
     }//GEN-LAST:event_insertButtonActionPerformed
 
-    private int dayToInt(String day, String[] days) {
+    private int dayNameToInt(String day, String[] days) {
         for (int i = 0; i < days.length; i++) {
             if (day.equals(days[i])) {
-                return i;
+                return i + 1;
             }
         }
         
         return 0;
     }
+    private String intToDayName(int day, String[] days) {
+        for (int i = 0; i < days.length; i++) {
+            if ((i + 1) == day) return days[i];
+        }
+        
+        return null;
+    }
+    
+    private String minutesToShours(int minutes) {
+        int h = minutes/2;
+        int m = minutes%2;
+        
+        return h + ":" + m;
+    }
     
     private int shoursToMinutes(String shours) {
+        int h,m;
+        
         String[] sh = shours.split(":");
-        int h = MyUtils.stringToInt(sh[0]); if (h < 0) return -1;
-        int m = MyUtils.stringToInt(sh[1]); if (m < 0) return -1;
+        
+        if (sh.length == 0) {
+            h = MyUtils.stringToInt(shours); if (h < 0) return -1;
+            m = 0;
+        }
+        else {
+            h = MyUtils.stringToInt(sh[0]); if (h < 0) return -1;
+            m = MyUtils.stringToInt(sh[1]); if (m < 0) return -1;
+        }
         
         return h*60 + m;
     }

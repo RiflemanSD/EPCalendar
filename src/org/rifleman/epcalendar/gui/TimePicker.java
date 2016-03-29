@@ -12,6 +12,7 @@ import java.util.Date;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import org.rifleman.epcalendar.utils.MyUtils;
 
 /**
  *
@@ -54,7 +55,7 @@ public class TimePicker extends JPanel {
     }
     
     public String getTime() {
-        return ((Date)this.timeSpinner.getValue()).toString();
+        return MyUtils.dateToString((Date)this.timeSpinner.getValue());
     }
     public void setTime(String value) {
         this.timeSpinner.setValue(new Date(value));
